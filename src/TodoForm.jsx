@@ -22,7 +22,7 @@ const TodoForm = ({ addTodo }) => {
           onChange={handleChange}
           id="outlined-basic"
           value={text}
-          label="Outlined"
+          label="新規追加"
           variant="outlined"
           slotProps={{
             input: {

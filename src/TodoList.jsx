@@ -34,7 +34,10 @@ const TodoList = () => {
 
   const addTodo = (text) => {
     setTodos((prevTodos) => {
-      return [...prevTodos, { text, id: 8, completed: false }];
+      return [
+        ...prevTodos,
+        { text, id: crypto.randomUUID(), completed: false },
+      ];
     });
   };
 
