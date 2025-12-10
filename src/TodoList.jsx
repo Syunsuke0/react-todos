@@ -1,26 +1,20 @@
-import * as React from "react";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
-import CommentIcon from "@mui/icons-material/Comment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoItem from "./TodoItem";
 import TodoForm from "./TodoForm";
 
-const initialTodos = [
-  { id: 1, text: "とらじろうの散歩", completed: false },
-  { id: 1, text: "ねこの散歩", completed: false },
-  { id: 1, text: "うしの散歩", completed: true },
-  { id: 1, text: "うまの散歩", completed: false },
-  { id: 1, text: "ドラゴンの散歩", completed: true },
-];
+const getInitialData = () => {
+  const data = JSON.parse(localStorage.getItem("todos"));
+  if (!data) return [];
+  return data;
+};
 
 const TodoList = () => {
-  const [todos, setTodos] = useState(initialTodos);
+  const [todos, setTodos] = useState(getInitialData);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const removeTodo = (id) => {
     setTodos((prevTodos) => prevTodos.filter((t) => t.id !== id));
