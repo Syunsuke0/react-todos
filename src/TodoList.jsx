@@ -21,6 +21,29 @@ const initialTodos = [
 
 const TodoList = () => {
   const [todos, setTodos] = useState(initialTodos);
+
+  const removeTodo = (id) => {
+    setTodos((prevTodos) => prevTodos.filter((t) => t.id !== id));
+  };
+
+  const toggleTodo = (id) => {
+    setTodos((prevTodos) => {
+      return prevTodos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, completed: !todo.completed };
+        } else {
+          return todo;
+        }
+      });
+    });
+  };
+
+  const addTodo = (text) => {
+    setTodos((prevTodos) => {
+      return [...prevTodos, { text, id: 8, completed: false }];
+    });
+  };
+
   return (
     <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
       {todos.map((todo) => (
@@ -31,7 +54,7 @@ const TodoList = () => {
           toggleTodo={() => toggleTodo(todo.id)}
         />
       ))}
-      <TodoForm />
+      <TodoForm addTodo={addTodo} />
     </List>
   );
 };
