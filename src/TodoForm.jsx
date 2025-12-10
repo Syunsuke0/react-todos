@@ -14,6 +14,7 @@ const TodoForm = () => {
         <TextField
           onChange={handleChange}
           id="outlined-basic"
+          value={text}
           label="Outlined"
           variant="outlined"
           slotProps={{
